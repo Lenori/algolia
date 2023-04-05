@@ -4,7 +4,7 @@ import * as S from './Results.styles';
 
 import { useHits } from 'react-instantsearch-hooks-web';
 
-import Result from './Result/Result';
+import Result from '../Result/Result';
 
 export default function Results() {
     const { hits } = useHits();

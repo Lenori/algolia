@@ -11,7 +11,14 @@ export default function Result(props: Interface.ResultPropTypes) {
         <S.Container>
             <article>
                 <h1>
-                    <Highlight attribute="name" hit={props.hit} />
+                    {props.components ? (
+                        <props.components.Highlight
+                            attribute="name"
+                            hit={props.hit}
+                        />
+                    ) : (
+                        <Highlight attribute="name" hit={props.hit} />
+                    )}
                 </h1>
                 <p>{props.hit.alternative_name}</p>
             </article>

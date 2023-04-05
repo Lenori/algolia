@@ -3,7 +3,7 @@ import React from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox } from 'react-instantsearch-hooks-web';
 
-import Results from '../../components/Results/Reults';
+import Results from '../../components/Results/Results';
 
 import * as S from './Home.styles';
 

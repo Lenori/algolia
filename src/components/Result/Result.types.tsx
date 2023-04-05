@@ -24,4 +24,5 @@ interface HitsPropTypes {
 
 export interface ResultPropTypes {
     hit: any;
+    components?: any;
 }
