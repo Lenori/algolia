@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox } from 'react-instantsearch-hooks-web';
+import { InstantSearch, useSearchBox } from 'react-instantsearch-hooks-web';
 
+import HierarchicalMenu from '../../components/HierarchicalMenu/HierarchicalMenu';
 import Results from '../../components/Results/Results';
 
 import * as S from './Home.styles';
@@ -21,14 +22,33 @@ export default function Home() {
         auth.algolia_api_key
     );
 
+    const VirtualSearchBox = (props: any) => {
+        useSearchBox(props);
+
+        return null;
+    };
+
+    const [searchValue, setSearchValue] = useState('');
+
+    useEffect(() => {
+        setSearchValue('imprint');
+    }, []);
+
     return (
         <S.Container>
             <InstantSearch
                 searchClient={searchClient}
                 indexName={auth.algolia_index_name}
+                routing={true}
             >
-                <SearchBox />
-                <Results />
+                <VirtualSearchBox />
+                <HierarchicalMenu attributes={['lvl0', 'lvl1', 'lvl2']} />
+                <input
+                    type="text"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                />
+                <Results query={searchValue} index={auth.algolia_index_name} />
             </InstantSearch>
         </S.Container>
     );

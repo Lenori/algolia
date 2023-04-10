@@ -1,5 +1,3 @@
-import { HitsProps } from 'react-instantsearch-hooks-web';
-
 interface _highlightResultMetaData {
     value: string;
     matchLevel: string;
@@ -22,4 +20,9 @@ export interface HitsPropTypes {
     objectID: string;
     _highlightResult: _highlightResult;
     __position: number;
+}
+
+export interface ResultsPropTypes {
+    query: string;
+    index: string;
 }
