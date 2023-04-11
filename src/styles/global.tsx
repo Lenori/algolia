@@ -17,6 +17,7 @@ export default createGlobalStyle`
         background-color: #F3F5F8;
 
         color: var(--dark-grey);
+        margin: 0;
     }
 
     a {        

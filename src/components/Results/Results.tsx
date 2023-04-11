@@ -2,35 +2,33 @@ import React, { useEffect } from 'react';
 
 import { useInstantSearch } from 'react-instantsearch-hooks-web';
 
+import Result from '../Result/Result';
+
 import * as S from './Results.styles';
 
 import * as Interface from './Results.types';
 
 export default function Results(props: Interface.ResultsPropTypes) {
-    const { results, setUiState } = useInstantSearch();
-
-    useEffect(() => {
-        setUiState({
-            [props.index]: {
-                query: props.query,
-            },
-        });
-    }, [props.query]);
+    const { results } = useInstantSearch();
 
     const products = JSON.parse(JSON.stringify(results.hits));
 
     return (
-        <ul>
-            {results.nbHits} results found for the query {results.query}.
-            {products.map(({ objectID, title, image_link, price }: any) => {
-                return (
-                    <li key={objectID}>
-                        <img src={image_link} />
-                        <span>{title}</span>
-                        <span>{price}</span>
-                    </li>
-                );
-            })}
-        </ul>
+        <S.Container>
+            <S.ResultsCount>
+                {results.nbHits} results found for the query{' '}
+                <span>{results.query}</span>
+            </S.ResultsCount>
+            <S.ResultsContainer>
+                {products.map(({ objectID, title, image_link, lvl2 }: any) => (
+                    <Result
+                        key={objectID}
+                        title={title}
+                        image={image_link}
+                        lvl2={lvl2}
+                    />
+                ))}
+            </S.ResultsContainer>
+        </S.Container>
     );
 }
